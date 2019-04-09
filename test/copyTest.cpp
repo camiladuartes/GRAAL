@@ -15,7 +15,6 @@ int main(void){
 	
     std::cout << ">>> Array A1: ";
 	std:: cout << copy(A+1, A+4, A1, sizeof(int));
-    //expect: 5,4,3,2,1	
 	for(auto i(begin(A1)); i!= end(A1); ++i){
 		cout << *i << " ";
 	}
@@ -23,7 +22,6 @@ int main(void){
 
     std::cout << ">>> Array B1: ";
 	copy(B+1, B+4, B1, sizeof(float));
-    //expect: 3,8,6.7,4.5,2.3
 	for(auto i(begin(B1)); i!= end(B1); ++i){
 		cout << *i << " ";
 	}

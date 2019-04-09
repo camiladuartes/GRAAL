@@ -1,2 +1,2 @@
 # GRAAL
-Generic Array Algorithms Library
+Generic Array Algorithms Library in C++

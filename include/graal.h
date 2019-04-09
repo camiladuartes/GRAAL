@@ -49,25 +49,4 @@ void *clone(const void *first, const void *last, size_t size);
 using Predicate = bool(*)(const void*);
 const void *find_if(const void *first, const void *last, size_t size, Predicate p);
 
-// /// Unique
-// /*!
-//  * Eliminates element repetitions in range [first;last)
-//  */
-// value_type *unique(int *first, int *last);
-
-// /// Partition
-// /*!
-//  * Put the vector in order by a pivot. Elements smaller than the 
-//  * pivot appear before, elements equal to the pivot in the middle 
-//  * and the largest in the end.
-//  */
-// void partition(value_type *first, value_type *last, value_type *pivot);
-
-// // /// Rotate
-// // /*!
-// //  * Rotate elements in range [first;last), putting the element n_first
-// //  * at the beginning.
-// //  */
-// // void *rotate( value_type *first, value_type *n_first, value_type *last );
-
 #endif

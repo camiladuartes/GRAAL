@@ -1,5 +1,5 @@
 /*!
- * \file int_ranges.h
+ * \file graal.h
  * \author Camila
  * \date March, 24th
  */

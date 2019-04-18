@@ -3,7 +3,7 @@
 #include <iostream>
 #include <iterator> // std::begin() , std::end()
 
-const void *min(const void *first, const void *last, size_t size, Compare cmp){
+const void *graal::min(const void *first, const void *last, size_t size, Compare cmp){
     const byte *menor = (const byte*)first; //const int menor = first;
     const byte *it = (const byte*) first; //auto it{first};
     it += size; //começar do segundo
@@ -17,7 +17,7 @@ const void *min(const void *first, const void *last, size_t size, Compare cmp){
     return menor;
 }
 
-void reverse(void *first, void *last, size_t size){
+void graal::reverse(void *first, void *last, size_t size){
     byte *pfirst = (byte *)first;
     byte *plast = (byte *)last;
     byte *aux = new byte[size];
@@ -32,7 +32,7 @@ void reverse(void *first, void *last, size_t size){
     }
 }
 
-void *copy(const void *first, const void *last, const void *d_first, size_t size){
+void *graal::copy(const void *first, const void *last, const void *d_first, size_t size){
     byte *pfirst = (byte *)first;
     byte *plast = (byte *)last;
     byte *pd_first = (byte *)d_first;
@@ -50,7 +50,7 @@ void *copy(const void *first, const void *last, const void *d_first, size_t size
     return pd_last;
 }
 
-void *clone(const void *first, const void *last, size_t size){
+void *graal::clone(const void *first, const void *last, size_t size){
     byte *pfirst = (byte *)first;
     byte *plast = (byte *)last;
     int distance = (plast-pfirst)/size;
@@ -65,7 +65,7 @@ void *clone(const void *first, const void *last, size_t size){
     return toReturn;
 }
 
-const void *find_if(const void *first, const void *last, size_t size, Predicate p){
+const void *graal::find_if(const void *first, const void *last, size_t size, Predicate p){
     byte *pfirst = (byte *)first;
     byte *plast = (byte *)last;
     while(pfirst != plast){
@@ -73,7 +73,130 @@ const void *find_if(const void *first, const void *last, size_t size, Predicate 
             byte *toReturn = pfirst;
             return toReturn;
         }
-        pfirst++;
+        pfirst += size;
     }
     return plast;
+}
+
+const void *graal::find(const void *first, const void *last, size_t size, const void *value, Equal eq){
+    byte *pfirst = (byte *)first;
+    byte *plast = (byte *)last;
+    byte *pvalue = (byte *)value;
+    while(pfirst != plast){
+        if(eq(pfirst, pvalue)){
+            byte *toReturn = pfirst;
+            return toReturn;
+        }
+        pfirst += size;
+    }
+    return plast;
+}
+
+bool graal::all_of(const void *first, const void *last, size_t size, Predicate p){
+    byte *pfirst = (byte *)first;
+    byte *plast = (byte *)last;
+    if((plast-pfirst)/size == 0){
+        return true;
+    }
+    else{
+        while(pfirst != plast){
+            if(!p(pfirst)){
+                return false;
+            }
+            pfirst += size;
+        }
+    }
+    return true;
+}
+
+bool graal::any_of(const void *first, const void *last, size_t size, Predicate p){
+    byte *pfirst = (byte *)first;
+    byte *plast = (byte *)last;
+    if((plast-pfirst)/size == 0){
+        return true;
+    }
+    else{
+        while(pfirst != plast){
+            if(p(pfirst)){
+                return true;
+            }
+            pfirst += size;
+        }
+    }
+    return false;
+}
+
+bool graal::none_of(const void *first, const void *last, size_t size, Predicate p){
+    byte *pfirst = (byte *)first;
+    byte *plast = (byte *)last;
+    while(pfirst != plast){
+        if(p(pfirst)){
+            return false;
+        }
+        pfirst += size;
+    }
+    return true;
+}
+
+bool graal::equal(const void *first1, const void *last1, const void *first2, size_t size, Equal eq){
+    byte *pfirst1 = (byte *)first1;
+    byte *plast1 = (byte *)last1;
+    byte *pfirst2 = (byte *)first2;
+    byte *lastRange = (byte *)((pfirst2+(plast1-pfirst1)));
+    while(pfirst2 != lastRange){
+        if(!eq(pfirst1, pfirst2)){
+            return false;
+        }
+        pfirst1 += size;
+        pfirst2 += size;
+    }
+    if(pfirst1 != plast1){
+        return false;
+    }
+    return true;
+}
+
+bool graal::equal(const void *first1, const void *last1, const void *first2, const void *last2, size_t size, Equal eq){
+    byte *pfirst1 = (byte *)first1;
+    byte *plast1 = (byte *)last1;
+    byte *pfirst2 = (byte *)first2;
+    byte *plast2 = (byte *)last2;
+    while(pfirst2 != plast2){
+        if(!eq(pfirst1, pfirst2)){
+            return false;
+        }
+        pfirst1 += size;
+        pfirst2 += size;
+    }
+    if(pfirst1 != plast1){
+        return false;
+    }
+    return true;
+}
+
+void *graal::unique(void *first, void *last, size_t size, Equal eq){
+    byte *clone = (byte *)first; //para conferir com cada valor anterior no for
+    byte *aux = (byte *)first; //será o novo last. Possui o local do próximo elemento candidato
+    int cont = 0; //para saber em que indice o first(que anda pelo vetor) está
+    byte *pfirst = (byte *)first;
+    byte *plast = (byte *)last;
+    while(pfirst != plast){
+        if(cont == 0){ //pois cont=0 faz não entrar no for
+            aux += size;
+        }
+        else{
+            for(int i = 0; i < cont; i++){
+                if(eq(pfirst, (clone+i*size))){
+                    break;
+                }
+                else if(!eq(pfirst, clone+i*size) && i == cont-1){
+                    *aux = *pfirst;
+                    aux += size;
+                }
+            }
+        }
+        pfirst += size;
+        cont++;
+    }
+    return aux;
 }

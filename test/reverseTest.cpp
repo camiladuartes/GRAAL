@@ -12,7 +12,7 @@ int main(void){
     float B[] = {2.3, 4.5, 6.7, 8, 3};
 	
     std::cout << ">>> Array A: ";
-	reverse(begin(A), end(A), sizeof(int));
+	graal::reverse(begin(A), end(A), sizeof(int));
     //expect: 5,4,3,2,1	
 	for(auto i(begin(A)); i!= end(A); ++i){
 		cout << *i << " ";
@@ -20,7 +20,7 @@ int main(void){
 	cout << std::endl;
 
     std::cout << ">>> Array B: ";
-	reverse(begin(B), end(B), sizeof(float));
+	graal::reverse(begin(B), end(B), sizeof(float));
     //expect: 3,8,6.7,4.5,2.3
 	for(auto i(begin(B)); i!= end(B); ++i){
 		cout << *i << " ";

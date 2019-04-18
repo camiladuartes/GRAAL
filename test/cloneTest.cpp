@@ -12,7 +12,7 @@ int main(void){
     std::cout << ">>> arrayA: ";
 	/*Precisa do cast(int) pois é retornado um ponteiro
 	void já que a função é do tipo void*/
-	int *arrayA = (int *)clone(A+1, A+4, sizeof(int));
+	int *arrayA = (int *)graal::clone(A+1, A+4, sizeof(int));
 	int cont = 0;
 	while(cont < std::distance(A+1, A+4)){
 		cout << *(arrayA+cont) << " ";
@@ -21,7 +21,7 @@ int main(void){
 	cout << std::endl;
 
     std::cout << ">>> arrayB: ";
-	float *arrayB = (float *)clone(B, B+4, sizeof(float));
+	float *arrayB = (float *)graal::clone(B, B+4, sizeof(float));
 	cont = 0;
 	while(cont < std::distance(B, B+4)){
 		cout << *(arrayB+cont) << " ";

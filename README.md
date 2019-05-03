@@ -5,7 +5,7 @@
 Was generated a generic library that contains the implementation of the functions: `min`, `reverse`, `copy`, `clone`, `find_if`, `find`, `all_of`, `any_of`, `none_of`, `equal`, `unique`, `partition` and `sort`. The library, Graal.a, can be linked to any application that needs to use the functions defined in there.
 
 
-# Parte 1: Compiling the Library
+# Part 1: Compiling the Library
 
 To compile the libray only we should follow these steps:
 
@@ -27,7 +27,7 @@ Just run as usual (assuming `$` is the terminal prompt):
 $ ./build/run_tests
 ```
 
-# Parte 2: Compiling the Driver Application
+# Part 2: Compiling the Driver Application
 
 
 Remember that to compile the driver application we must first complete the library implementation.

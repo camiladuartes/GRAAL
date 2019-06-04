@@ -122,6 +122,8 @@ namespace graal {
      * \return A pointer to the begining of the range for which
      * predicate p return false.
      */
+    void *partition(void *first, void *last, void *pivot, size_t size, Compare cmp);
+    
     void *partition(void *first, void *last, size_t size, Predicate p);
 
     /// Qsort
@@ -130,7 +132,6 @@ namespace graal {
      * receives a function pointer to a comparison function
      * that receives two generic pointers "a" and "b" return true if a < b. 
      */
-    void *partition(void *first, void *last, void *pivot, size_t size, Compare cmp);
     void qsort(void *first, void *last, size_t size, Compare cmp);
 
 }
